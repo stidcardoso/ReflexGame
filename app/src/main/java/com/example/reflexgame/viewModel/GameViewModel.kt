@@ -30,16 +30,16 @@ class GameViewModel : ViewModel() {
 
     fun startGame() {
         maximumClickTime = INITIAL_TURN_TIME
-        _scoreLiveData.value = (0)
+        _scoreLiveData.value = 0
         _gameStateLiveData.value = GameState.STARTED
         generateHighlightSquarePosition()
     }
 
     private fun stopGame() {
-        _gameStateLiveData.value = (GameState.STOPPED)
-        _scoreLiveData.value = (0)
+        _gameStateLiveData.value = GameState.STOPPED
+        _scoreLiveData.value = 0
         turns = 1
-        _squareHighlighted.value = (null)
+        _squareHighlighted.value = null
     }
 
     fun onPositionClicked(position: Pair<Int, Int>) {
@@ -59,7 +59,7 @@ class GameViewModel : ViewModel() {
     }
 
     private fun generateHighlightSquarePosition() {
-        _squareHighlighted.value = (Pair(generateRandomPosition(), generateRandomPosition()))
+        _squareHighlighted.value = Pair(generateRandomPosition(), generateRandomPosition())
         startTurnTimer()
     }
 
@@ -75,7 +75,7 @@ class GameViewModel : ViewModel() {
 
     private fun decreaseScore() {
         coroutineJob?.cancel()
-        _scoreLiveData.value = (_scoreLiveData.value?.dec())
+        _scoreLiveData.value = _scoreLiveData.value?.dec()
         if (!isValidScore()) return
         turns = turns.inc()
         validateTurns()
